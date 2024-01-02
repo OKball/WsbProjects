@@ -1,4 +1,21 @@
+var config = {
+    type: Phaser.AUTO,
+    width: 600,
+    height: 300,
+    scene: [SceneBoot, SceneGame],
+    scale: {
+        parent: 'Game_div',
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+        width: 800,
+        height: 600
+    },
+    physics: {
+        default: 'arcade',
+        arcade: {
+            gravity: { y: 200 }
+        }
+    }
+};
 
-window.onload = function() {
-    var game = new Phaser.game();
-}
+var game = new Phaser.Game(config);
