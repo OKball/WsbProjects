@@ -3,8 +3,11 @@ class SceneBoot extends Phaser.Scene{
         super("booting");
     }
     preload(){
-        this.load.image('sky', 'assets/sky.png');
-        this.load.image('ball', 'assets/star.png');
+        this.load.image('background', 'assets/background.png');
+        // this.load.image('ball', 'assets/star.png');
+        this.load.image('ball', 'assets/ball.png');
+        this.load.image('basket', 'assets/basket.png');
+        this.load.image('basket_collider', 'assets/basket_collider.png');
     }
     
     create(){
