@@ -11,7 +11,10 @@ var config = {
         height: 600
     },
     physics: {
-        default: 'arcade'
+        default: 'arcade',
+        // arcade: {
+        //     debug: false
+        // }
     }
 };
 
