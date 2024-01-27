@@ -17,8 +17,8 @@ class SceneGame extends Phaser.Scene {
         this.basket_collider_left = this.physics.add.image(350, 255, 'basket_collider').setCircle(4).setImmovable();
         this.basket_collider_right = this.physics.add.image(450, 255, 'basket_collider').setCircle(4).setImmovable();
         this.ball = this.physics.add.image(50, 450, 'ball').setCircle(24);
-        this.ball.setCollideWorldBounds(true);
-        this.ball.setGravityY(1000)
+        this.ball.setCollideWorldBounds(true, 1, 0.7, true);
+        this.ball.setGravityY(1000);
         this.ball.setBounce(1, 0.7);
         this.ball.setDamping(true);
         this.ball.setDrag(0.6, 1);
@@ -27,7 +27,7 @@ class SceneGame extends Phaser.Scene {
         this.ball.setAngularVelocity(90);
         this.input.setDraggable(this.ball, true);
 
-        
+        //Zones checing if ball went through the basket from the upside
 
         this.point_zone_one = this.add.zone(400, 255, 84, 2);
         this.physics.add.existing(this.point_zone_one, false);
@@ -40,6 +40,14 @@ class SceneGame extends Phaser.Scene {
         this.point_zone_three = this.add.zone(400, 315, 200, 2);
         this.physics.add.existing(this.point_zone_three, false);
         this.point_zone_three.body.moves = false;
+
+        this.point_zone_side_right = this.add.zone(500, 300, 1, 600);
+        this.physics.add.existing(this.point_zone_side_right, false);
+        this.point_zone_side_right.body.moves = false;
+        
+        this.point_zone_side_left = this.add.zone(300, 300, 1, 600);
+        this.physics.add.existing(this.point_zone_side_left, false);
+        this.point_zone_side_left.body.moves = false;
         
         this.bottom_basket = this.physics.add.image(400, 260, 'bottom_basket').setImmovable();
         this.bottom_basket.body.checkCollision.up = false;
@@ -49,6 +57,7 @@ class SceneGame extends Phaser.Scene {
         this.veloX = 0;
         this.veloY = 0;
 
+
         this.ball.body.onOverlap = true;
         this.basket_side_right = this.add.image(442, 255, 'basket_collider');
         this.basket_side_left = this.add.image(358, 255, 'basket_collider');
@@ -56,6 +65,7 @@ class SceneGame extends Phaser.Scene {
         this.physics.add.collider(this.ball, this.basket_collider_right);
         this.physics.add.collider(this.ball, this.bottom_basket);
 
+        //Draging handlers
 
         this.input.on('dragstart', (pointer, gameObject) =>
         {
@@ -73,6 +83,8 @@ class SceneGame extends Phaser.Scene {
             gameObject.body.moves = true
             this.calcVelocity();
         });
+
+
     }
 
     updatePos(X, Y){
@@ -98,12 +110,23 @@ class SceneGame extends Phaser.Scene {
             this.scoring_counter = 1;
         });
 
+
         if (this.scoring_counter == 1){
             this.physics.overlap(this.ball, this.point_zone_two, (ball, point_zone_two) =>
         {
             this.scoring_counter = 2;
         });
-        }   
+        }
+
+        this.physics.overlap(this.ball, this.point_zone_side_right, (ball, point_zone_side_right) =>
+        {
+            this.scoring_counter = 0;
+        });
+
+        this.physics.overlap(this.ball, this.point_zone_side_left, (ball, point_zone_side_left) =>
+        {
+            this.scoring_counter = 0;
+        });
 
         if (this.scoring_counter == 2){
             this.physics.overlap(this.ball, this.point_zone_three, (ball, point_zone_three) =>
@@ -113,8 +136,8 @@ class SceneGame extends Phaser.Scene {
             this.scoring_counter = 0;
             this.updatePoints();
         });
-        // this.game.physics.arcade.collide(this.ball, this.basket);
         }
+  
     }
 
     update() {
