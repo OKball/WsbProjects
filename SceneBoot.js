@@ -13,6 +13,13 @@ class SceneBoot extends Phaser.Scene{
     
     create(){
         this.add.text(50,50, "Loading game...");
-        this.scene.start("playing");
+        if (mobile){
+            this.scene.start("playing_mobile");
+        }else{
+            this.scene.start("playing");
+        }
+        // this.scene.start("playing");
+        console.log(mobile);
+        
     }
 }

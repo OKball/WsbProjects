@@ -1,7 +1,7 @@
 
-class SceneGame extends Phaser.Scene {
+class SceneMobile extends Phaser.Scene {
     constructor() {
-        super("playing");
+        super("playing_mobile");
         
     }
 
