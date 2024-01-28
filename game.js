@@ -15,7 +15,7 @@ var win_ingame_height = 600;
 if(window.mobileCheck()){
     win_width = 300;
     win_height = 600;
-    win_ingame_width = 450;
+    win_ingame_width = 600;
     win_ingame_height = 800;
 }
 
@@ -25,7 +25,7 @@ var config = {
     height: win_height,
     scene: [SceneBoot, SceneGame, SceneMobile],
     scale: {
-        parent: 'Game_div',
+        parent: "Game_div",
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
         width: win_ingame_width,
