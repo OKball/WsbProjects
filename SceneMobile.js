@@ -8,15 +8,21 @@ class SceneMobile extends Phaser.Scene {
         this.scoring_counter = 0;
         this.point = 0;
         this.background = this.add.image(win_ingame_width/2, win_ingame_height/2, 'background_mobile');
-        this.basket = this.add.image(win_ingame_width/2, (win_ingame_height/2) - 200, 'basket');
-        this.scoreboard = this.add.text(win_ingame_width/2, 100, this.point);
+        this.basket = this.add.image(win_ingame_width/2, (win_ingame_height/2) - 150, 'basket');
+        this.basket.setScale(1.75);
+
+        this.scoreboard = this.add.text(win_ingame_width/2, 75, this.point);
+        this.scoreboard.setScale(1.75);
 
 
         //basket has 42 pixel radius --> from left to right is 84
         //and 55 below
-        this.basket_collider_left = this.physics.add.image(250, 255, 'basket_collider').setCircle(4).setImmovable();
-        this.basket_collider_right = this.physics.add.image(350, 255, 'basket_collider').setCircle(4).setImmovable();
+        this.basket_collider_left = this.physics.add.image(225, 346, 'basket_collider').setCircle(4).setImmovable();
+        this.basket_collider_left.setScale(1.75);
+        this.basket_collider_right = this.physics.add.image(375, 346, 'basket_collider').setCircle(4).setImmovable();
+        this.basket_collider_right.setScale(1.75);
         this.ball = this.physics.add.image(50, 450, 'ball').setCircle(24);
+        this.ball.setScale(1.75);
         this.ball.setCollideWorldBounds(true, 1, 0.7, true);
         this.ball.setGravityY(1000);
         this.ball.setBounce(1, 0.7);
@@ -29,15 +35,15 @@ class SceneMobile extends Phaser.Scene {
 
         //Zones checing if ball went through the basket from the upside
 
-        this.point_zone_one = this.add.zone(300, 255, 84, 2);
+        this.point_zone_one = this.add.zone(300, 355, 84, 2);
         this.physics.add.existing(this.point_zone_one, false);
         this.point_zone_one.body.moves = false;
 
-        this.point_zone_two = this.add.zone(300, 285, 84, 2);
+        this.point_zone_two = this.add.zone(300, 425, 84, 2);
         this.physics.add.existing(this.point_zone_two, false);
         this.point_zone_two.body.moves = false;
 
-        this.point_zone_three = this.add.zone(300, 315, 200, 2);
+        this.point_zone_three = this.add.zone(300, 445, 200, 2);
         this.physics.add.existing(this.point_zone_three, false);
         this.point_zone_three.body.moves = false;
 
@@ -49,7 +55,8 @@ class SceneMobile extends Phaser.Scene {
         this.physics.add.existing(this.point_zone_side_left, false);
         this.point_zone_side_left.body.moves = false;
         
-        this.bottom_basket = this.physics.add.image(300, 260, 'bottom_basket').setImmovable();
+        this.bottom_basket = this.physics.add.image(300, 356, 'bottom_basket').setImmovable();
+        this.bottom_basket.setScale(1.75);
         this.bottom_basket.body.checkCollision.up = false;
 
         this.posArrY = [0, 0];
