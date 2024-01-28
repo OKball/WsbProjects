@@ -4,7 +4,7 @@ class SceneBoot extends Phaser.Scene{
     }
     preload(){
         this.load.image('background', 'assets/background.png');
-        // this.load.image('ball', 'assets/star.png');
+        this.load.image('background_mobile', 'assets/background_mobile.png');
         this.load.image('ball', 'assets/ball.png');
         this.load.image('basket', 'assets/basket.png');
         this.load.image('basket_collider', 'assets/basket_collider.png');
@@ -13,6 +13,10 @@ class SceneBoot extends Phaser.Scene{
     
     create(){
         this.add.text(50,50, "Loading game...");
-        this.scene.start("playing");
+        if (mobile){
+            this.scene.start("playing_mobile");
+        }else{
+            this.scene.start("playing");
+        }
     }
 }

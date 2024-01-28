@@ -1,10 +1,7 @@
-.Game_container{
-    margin-top: 100px;
+#Game_div{
+    /* margin-top: 100px; */
     margin-left: auto;
     margin-right: auto;
     background-color: rgb(7, 7, 7);
     min-width: 600px;
-    width: 70%;
-    height: 60%;
 }
-
